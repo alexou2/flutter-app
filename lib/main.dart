@@ -70,6 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
   // used for spinbox
   double spinboxValue = 0;
 
+  // for checkbox
+  bool? checkboxValue = false;
+
 
   void dropdown_clicked() {}
 
@@ -155,6 +158,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text("dropdown: "+input.value!),
             Text("spinbox: "+spinboxValue.toString()),
+            Checkbox(value: checkboxValue,tristate: true, onChanged: (bool? newValue)=> setState(() {
+              checkboxValue = newValue;
+              print(checkboxValue);
+            }))
           ],
         ),
       ),
