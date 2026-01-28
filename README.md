@@ -1,6 +1,7 @@
 # flutter_app
 
 A new Flutter project.
+[click here for releases](https://github.com/alexou2/flutter-app/releases)
 
 ## Getting Started
 
