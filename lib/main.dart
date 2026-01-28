@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
-String input = "";
 
 void main() {
   runApp(const MyApp());
@@ -55,11 +53,15 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-
+class Wrapper<T>{
+T? value;
+Wrapper(T this.value);
+}
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-   // List<String> _numbers_list = <String>['One', 'Two', 'Three', 'Four'];;
-   // String input;
+  List<String> _numbers_list = <String>['One', 'Two', 'Three', 'Four'];
+  var input = Wrapper("One");
+
 
   void dropdown_clicked() {}
 
@@ -72,6 +74,24 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  Widget e<T>(Wrapper<T> value, List<T> options) {
+    // value = options.first;
+    DropdownButton dropdown = DropdownButton<T>(
+      value: value.value,
+      onChanged: (T? newValue) {
+        setState(() {
+          value.value = newValue;
+          print(input);
+        });
+      },
+
+      items: options.map<DropdownMenuItem<T>>((T value) {
+        return DropdownMenuItem<T>(value: value, child: Text(value.toString()));
+      }).toList(),
+    );
+    return dropdown;
   }
 
   @override
@@ -111,7 +131,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: .center,
           children: [
-            DropdownButtonExample(options: list, input: input),
+            e(this.input, _numbers_list),
+            // DropdownButtonExample(options: list, input: input),
             // Text('$_dropdownValue'),
             // DropdownButtonExample(),
             const Text('You have pushed the button this many times:'),
@@ -119,6 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            Text(input.value!),
           ],
         ),
       ),
@@ -127,46 +149,6 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
-    );
-  }
-}
-
-class DropdownButtonExample extends StatefulWidget {
-  final List<String> options;
-  final String input;
-
-  const DropdownButtonExample({
-    super.key,
-    required this.options,
-    required this.input,
-  });
-
-  @override
-  State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
-}
-
-class _DropdownButtonExampleState extends State<DropdownButtonExample> {
-  String _dropdownValue = "One";
-
-  @override
-  Widget build(BuildContext context) {
-    // _dropdownValue = super.widget.options.first;
-    return DropdownButton<String>(
-      value: _dropdownValue,
-      icon: const Icon(Icons.arrow_downward),
-      elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
-      underline: Container(height: 2, color: Colors.deepPurpleAccent),
-      onChanged: (String? value) {
-        input = value!;
-        // This is called when the user selects an item.
-        setState(() {
-          _dropdownValue = value!;
-        });
-      },
-      items: super.widget.options.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(value: value, child: Text(value));
-      }).toList(),
     );
   }
 }
