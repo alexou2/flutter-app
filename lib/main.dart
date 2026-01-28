@@ -59,8 +59,7 @@ Wrapper(T this.value);
 }
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  List<String> _numbers_list = <String>['One', 'Two', 'Three', 'Four'];
-  var input = Wrapper("One");
+
 
 
   void dropdown_clicked() {}
@@ -76,8 +75,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Widget e<T>(Wrapper<T> value, List<T> options) {
-    // value = options.first;
+// used for the dropdown menu
+  // the list of the elements in the dropdown menu
+  List<String> _numbers_list = <String>['One', 'Two', 'Three', 'Four'];
+  // the value of the selected input
+  var input = Wrapper("One");
+// 1st argument: the variable that will contain the selected value, wrapped in class Wrapper
+// 2nd argument: the list of options to be displayed
+  Widget createDropdownMenu<T>(Wrapper<T> value, List<T> options) {
     DropdownButton dropdown = DropdownButton<T>(
       value: value.value,
       onChanged: (T? newValue) {
@@ -131,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: .center,
           children: [
-            e(this.input, _numbers_list),
+            createDropdownMenu(this.input, _numbers_list),
             // DropdownButtonExample(options: list, input: input),
             // Text('$_dropdownValue'),
             // DropdownButtonExample(),
