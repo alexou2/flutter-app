@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinbox/flutter_spinbox.dart';
 
 
 void main() {
@@ -60,6 +61,14 @@ Wrapper(T this.value);
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+// used for the dropdown menu
+  // the list of the elements in the dropdown menu
+  List<String> _numbers_list = <String>['One', 'Two', 'Three', 'Six-Seven'];
+  // the value of the selected input. it needs to be part of the option list
+  var input = Wrapper("One");
+
+  // used for spinbox
+  double spinboxValue = 0;
 
 
   void dropdown_clicked() {}
@@ -75,11 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-// used for the dropdown menu
-  // the list of the elements in the dropdown menu
-  List<String> _numbers_list = <String>['One', 'Two', 'Three', 'Six-Seven'];
-  // the value of the selected input. it needs to be part of the option list
-  var input = Wrapper("One");
+
 // 1st argument: the variable that will contain the selected value, wrapped in class Wrapper
 // 2nd argument: the list of options to be displayed
   Widget createDropdownMenu<T>(Wrapper<T> value, List<T> options) {
@@ -137,15 +142,19 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: .center,
           children: [
             createDropdownMenu(this.input, _numbers_list),
-            // DropdownButtonExample(options: list, input: input),
-            // Text('$_dropdownValue'),
-            // DropdownButtonExample(),
+            SpinBox(
+              min: 1,
+              max: 100,
+              value: spinboxValue,
+              onChanged: (value) => setState(() {spinboxValue = value;},
+              )),
             const Text('You have pushed the button this many times:'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text(input.value!),
+            Text("dropdown: "+input.value!),
+            Text("spinbox: "+spinboxValue.toString()),
           ],
         ),
       ),
