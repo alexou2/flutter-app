@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 // used for the dropdown menu
   // the list of the elements in the dropdown menu
-  List<String> _numbers_list = <String>['One', 'Two', 'Three', 'Four'];
+  List<String> _numbers_list = <String>['One', 'Two', 'Three', 'Six-Seven'];
   // the value of the selected input. it needs to be part of the option list
   var input = Wrapper("One");
 // 1st argument: the variable that will contain the selected value, wrapped in class Wrapper
