@@ -182,7 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // ],
           children: [
             // unarmed spinbox
-            Text('Unarmed Level:  ${pow(2 * unarmedXPSpinboxValue, (1 / 3))}'),
+            Text('Unarmed Level:  ${pow(2 * unarmedXPSpinboxValue, (1 / 3)).round()}'),
             SpinBox(
               min: 0,
               max: 500_000,
@@ -193,7 +193,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             // dagger spinbox
-            Text('Dagger Level:  ${pow(2 * daggerXPSpinboxValue, (1 / 3))}'),
+            Text('Dagger Level:  ${pow(2 * daggerXPSpinboxValue, (1 / 3)).round()}'),
             SpinBox(
               min: 0,
               max: 500_000,
@@ -204,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             // shield spinbox
-            Text('Shield Level:  ${pow(2 * shieldXPSpinboxValue, (1 / 3))}'),
+            Text('Shield Level:  ${pow(2 * shieldXPSpinboxValue, (1 / 3)).round()}'),
             SpinBox(
               min: 0,
               max: 500_000,
@@ -215,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             // staff spinbox
-            Text('Staff Level:  ${pow(2 * staffXPSpinboxValue, (1 / 3))}'),
+            Text('Staff Level:  ${pow(2 * staffXPSpinboxValue, (1 / 3)).round()}'),
             SpinBox(
               min: 0,
               max: 500_000,
@@ -226,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             // sword spinbox
-            Text('Sword Level:  ${pow(2 * swordXPSpinboxValue, (1 / 3))}'),
+            Text('Sword Level:  ${pow(2 * swordXPSpinboxValue, (1 / 3)).round()}'),
             SpinBox(
               min: 0,
               max: 500_000,
@@ -237,7 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             // 2h sword spinbox
-            Text('2-Handed Sword Level:  ${pow(2 * h2_swordXPSpinboxValue, (1 / 3))}'),
+            Text('2-Handed Sword Level:  ${pow(2 * h2_swordXPSpinboxValue, (1 / 3)).round()}'),
             SpinBox(
               min: 0,
               max: 500_000,
@@ -248,7 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             // haft spinbox
-            Text('Haft Level: ${pow(2 * haftXPSpinboxValue, (1 / 3))}'),
+            Text('Haft Level: ${pow(2 * haftXPSpinboxValue, (1 / 3)).round()}'),
             SpinBox(
               min: 0,
               max: 500_000,
@@ -260,7 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             // 2h haft spinbox
             Text(
-              '2-Handed Haft Level: ${pow(2 * h2_haftXPSpinboxValue, (1 / 3))}',
+              '2-Handed Haft Level: ${pow(2 * h2_haftXPSpinboxValue, (1 / 3)).round()}',
             ),
             SpinBox(
               min: 0,
@@ -272,7 +272,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             // polearm spinbox
-            Text('Polearm Level: ${pow(2 * polearmXPSpinboxValue, (1 / 3))}'),
+            Text('Polearm Level: ${pow(2 * polearmXPSpinboxValue, (1 / 3)).round()}'),
             SpinBox(
               min: 0,
               max: 500_000,
@@ -283,7 +283,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             // sythe spinbox
-            Text('Sythe Level: ${pow(2 * sytheXPSpinboxValue, 1 / 3)}'),
+            Text('Sythe Level: ${pow(2 * sytheXPSpinboxValue, 1 / 3).round()}'),
             SpinBox(
               min: 0,
               max: 500_000,
