@@ -81,16 +81,16 @@ class _MyHomePageState extends State<MyHomePage> {
   bool? checkboxValue = false;
 
   // equipement levels
-  double unarmedLevelSpinboxValue = 0;
-  double daggerLevelSpinboxValue = 0;
-  double shieldLevelSpinboxValue = 0;
-  double staffLevelSpinboxValue = 0;
-  double swordLevelSpinboxValue = 0;
-  double haftLevelSpinboxValue = 0;
-  double h2_swordLevelSpinboxValue = 0;
-  double h2_haftLevelSpinboxValue = 0;
-  double polearmLevelSpinboxValue = 0;
-  double sytheLevelSpinboxValue = 0;
+  double unarmedXPSpinboxValue = 0;
+  double daggerXPSpinboxValue = 0;
+  double shieldXPSpinboxValue = 0;
+  double staffXPSpinboxValue = 0;
+  double swordXPSpinboxValue = 0;
+  double haftXPSpinboxValue = 0;
+  double h2_swordXPSpinboxValue = 0;
+  double h2_haftXPSpinboxValue = 0;
+  double polearmXPSpinboxValue = 0;
+  double sytheXPSpinboxValue = 0;
 
   void dropdown_clicked() {}
 
@@ -182,117 +182,118 @@ class _MyHomePageState extends State<MyHomePage> {
           // ],
           children: [
             // unarmed spinbox
-            const Text('Unarmed Level:'),
+            Text('Unarmed Level:  ${pow(2 * unarmedXPSpinboxValue, (1 / 3))}'),
             SpinBox(
               min: 0,
               max: 500_000,
-              value: unarmedLevelSpinboxValue,
+              value: unarmedXPSpinboxValue,
               onChanged: (value) => setState(() {
-                unarmedLevelSpinboxValue = value;
+                unarmedXPSpinboxValue = value;
               }),
             ),
 
             // dagger spinbox
-            const Text('Dagger Level:'),
+            Text('Dagger Level:  ${pow(2 * daggerXPSpinboxValue, (1 / 3))}'),
             SpinBox(
               min: 0,
               max: 500_000,
-              value: daggerLevelSpinboxValue,
+              value: daggerXPSpinboxValue,
               onChanged: (value) => setState(() {
-                daggerLevelSpinboxValue = value;
+                daggerXPSpinboxValue = value;
               }),
             ),
 
             // shield spinbox
-            const Text('Shield Level:'),
+            Text('Shield Level:  ${pow(2 * shieldXPSpinboxValue, (1 / 3))}'),
             SpinBox(
               min: 0,
               max: 500_000,
-              value: shieldLevelSpinboxValue,
+              value: shieldXPSpinboxValue,
               onChanged: (value) => setState(() {
-                shieldLevelSpinboxValue = value;
+                shieldXPSpinboxValue = value;
               }),
             ),
 
             // staff spinbox
-            const Text('Staff Level:'),
+            Text('Staff Level:  ${pow(2 * staffXPSpinboxValue, (1 / 3))}'),
             SpinBox(
               min: 0,
               max: 500_000,
-              value: staffLevelSpinboxValue,
+              value: staffXPSpinboxValue,
               onChanged: (value) => setState(() {
-                staffLevelSpinboxValue = value;
+                staffXPSpinboxValue = value;
               }),
             ),
 
             // sword spinbox
-            const Text('Sword Level:'),
+            Text('Sword Level:  ${pow(2 * swordXPSpinboxValue, (1 / 3))}'),
             SpinBox(
               min: 0,
               max: 500_000,
-              value: swordLevelSpinboxValue,
+              value: swordXPSpinboxValue,
               onChanged: (value) => setState(() {
-                swordLevelSpinboxValue = value;
+                swordXPSpinboxValue = value;
               }),
             ),
 
             // 2h sword spinbox
-            const Text('2-Handed Sword Level:'),
+            Text('2-Handed Sword Level:  ${pow(2 * h2_swordXPSpinboxValue, (1 / 3))}'),
             SpinBox(
               min: 0,
               max: 500_000,
-              value: h2_swordLevelSpinboxValue,
+              value: h2_swordXPSpinboxValue,
               onChanged: (value) => setState(() {
-                h2_swordLevelSpinboxValue = value;
+                h2_swordXPSpinboxValue = value;
               }),
             ),
 
             // haft spinbox
-            const Text('Haft Level:'),
+            Text('Haft Level: ${pow(2 * haftXPSpinboxValue, (1 / 3))}'),
             SpinBox(
               min: 0,
               max: 500_000,
-              value: haftLevelSpinboxValue,
+              value: haftXPSpinboxValue,
               onChanged: (value) => setState(() {
-                haftLevelSpinboxValue = value;
+                haftXPSpinboxValue = value;
               }),
             ),
 
             // 2h haft spinbox
-            const Text('2-Handed Haft Level:'),
+            Text(
+              '2-Handed Haft Level: ${pow(2 * h2_haftXPSpinboxValue, (1 / 3))}',
+            ),
             SpinBox(
               min: 0,
               max: 500_000,
-              value: h2_haftLevelSpinboxValue,
+              value: h2_haftXPSpinboxValue,
               onChanged: (value) => setState(() {
-                h2_haftLevelSpinboxValue = value;
+                h2_haftXPSpinboxValue = value;
               }),
             ),
 
             // polearm spinbox
-            const Text('Polearm Level:'),
+            Text('Polearm Level: ${pow(2 * polearmXPSpinboxValue, (1 / 3))}'),
             SpinBox(
               min: 0,
               max: 500_000,
-              value: polearmLevelSpinboxValue,
+              value: polearmXPSpinboxValue,
               onChanged: (value) => setState(() {
-                polearmLevelSpinboxValue = value;
+                polearmXPSpinboxValue = value;
               }),
             ),
 
             // sythe spinbox
-            Text('Sythe Level:$playerExp xp/ ${0.5*pow(sytheLevelSpinboxValue+1,3)} xp required'),
+            Text('Sythe Level: ${pow(2 * sytheXPSpinboxValue, 1 / 3)}'),
             SpinBox(
               min: 0,
               max: 500_000,
-              value: sytheLevelSpinboxValue,
+              value: sytheXPSpinboxValue,
               onChanged: (value) => setState(() {
-                sytheLevelSpinboxValue = value;
-                playerExp-=0.5*pow(value+1,3);
-              },
-              ),
-                enabled: playerExp>0.5*pow(sytheLevelSpinboxValue,3)
+                sytheXPSpinboxValue = value;
+                // playerExp-=0.5*pow(value+1,3);
+              }),
 
+              // enabled: playerExp>0.5*pow(sytheXPSpinboxValue,3)/
             ),
           ],
         ),
@@ -305,4 +306,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
 // Also the Formulae for the XP is 0.5*(X^3). X is the level you are trying to reach and all values are rounded
