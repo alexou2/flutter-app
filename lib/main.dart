@@ -1,6 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -54,16 +55,22 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-class Wrapper<T>{
-T? value;
-Wrapper(T this.value);
+
+class Wrapper<T> {
+  T? value;
+
+  Wrapper(T this.value);
 }
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-// used for the dropdown menu
+  double playerExp = 1_000;
+
+  // used for the dropdown menu
   // the list of the elements in the dropdown menu
   List<String> _numbers_list = <String>['One', 'Two', 'Three', 'Six-Seven'];
+
   // the value of the selected input. it needs to be part of the option list
   var input = Wrapper("One");
 
@@ -73,6 +80,17 @@ class _MyHomePageState extends State<MyHomePage> {
   // for checkbox
   bool? checkboxValue = false;
 
+  // equipement levels
+  double unarmedLevelSpinboxValue = 0;
+  double daggerLevelSpinboxValue = 0;
+  double shieldLevelSpinboxValue = 0;
+  double staffLevelSpinboxValue = 0;
+  double swordLevelSpinboxValue = 0;
+  double haftLevelSpinboxValue = 0;
+  double h2_swordLevelSpinboxValue = 0;
+  double h2_haftLevelSpinboxValue = 0;
+  double polearmLevelSpinboxValue = 0;
+  double sytheLevelSpinboxValue = 0;
 
   void dropdown_clicked() {}
 
@@ -87,9 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-
-// 1st argument: the variable that will contain the selected value, wrapped in class Wrapper
-// 2nd argument: the list of options to be displayed
+  // 1st argument: the variable that will contain the selected value, wrapped in class Wrapper
+  // 2nd argument: the list of options to be displayed
   Widget createDropdownMenu<T>(Wrapper<T> value, List<T> options) {
     DropdownButton dropdown = DropdownButton<T>(
       value: value.value,
@@ -143,25 +160,140 @@ class _MyHomePageState extends State<MyHomePage> {
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
           mainAxisAlignment: .center,
+          // children: [
+          //   createDropdownMenu(this.input, _numbers_list),
+          //   SpinBox(
+          //     min: 1,
+          //     max: 100,
+          //     value: spinboxValue,
+          //     onChanged: (value) => setState(() {spinboxValue = value;},
+          //     ), enabled: checkboxValue,),
+          //   const Text('You have pushed the button this many times:'),
+          //   Text(
+          //     '$_counter',
+          //     style: Theme.of(context).textTheme.headlineMedium,
+          //   ),
+          //   Text("dropdown: "+input.value!),
+          //   Text("spinbox: "+spinboxValue.toString()),
+          //   Checkbox(value: checkboxValue,tristate: true, onChanged: (bool? newValue)=> setState(() {
+          //     checkboxValue = newValue;
+          //     print(checkboxValue);
+          //   }))
+          // ],
           children: [
-            createDropdownMenu(this.input, _numbers_list),
+            // unarmed spinbox
+            const Text('Unarmed Level:'),
             SpinBox(
-              min: 1,
-              max: 100,
-              value: spinboxValue,
-              onChanged: (value) => setState(() {spinboxValue = value;},
-              )),
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              min: 0,
+              max: 500_000,
+              value: unarmedLevelSpinboxValue,
+              onChanged: (value) => setState(() {
+                unarmedLevelSpinboxValue = value;
+              }),
             ),
-            Text("dropdown: "+input.value!),
-            Text("spinbox: "+spinboxValue.toString()),
-            Checkbox(value: checkboxValue,tristate: true, onChanged: (bool? newValue)=> setState(() {
-              checkboxValue = newValue;
-              print(checkboxValue);
-            }))
+
+            // dagger spinbox
+            const Text('Dagger Level:'),
+            SpinBox(
+              min: 0,
+              max: 500_000,
+              value: daggerLevelSpinboxValue,
+              onChanged: (value) => setState(() {
+                daggerLevelSpinboxValue = value;
+              }),
+            ),
+
+            // shield spinbox
+            const Text('Shield Level:'),
+            SpinBox(
+              min: 0,
+              max: 500_000,
+              value: shieldLevelSpinboxValue,
+              onChanged: (value) => setState(() {
+                shieldLevelSpinboxValue = value;
+              }),
+            ),
+
+            // staff spinbox
+            const Text('Staff Level:'),
+            SpinBox(
+              min: 0,
+              max: 500_000,
+              value: staffLevelSpinboxValue,
+              onChanged: (value) => setState(() {
+                staffLevelSpinboxValue = value;
+              }),
+            ),
+
+            // sword spinbox
+            const Text('Sword Level:'),
+            SpinBox(
+              min: 0,
+              max: 500_000,
+              value: swordLevelSpinboxValue,
+              onChanged: (value) => setState(() {
+                swordLevelSpinboxValue = value;
+              }),
+            ),
+
+            // 2h sword spinbox
+            const Text('2-Handed Sword Level:'),
+            SpinBox(
+              min: 0,
+              max: 500_000,
+              value: h2_swordLevelSpinboxValue,
+              onChanged: (value) => setState(() {
+                h2_swordLevelSpinboxValue = value;
+              }),
+            ),
+
+            // haft spinbox
+            const Text('Haft Level:'),
+            SpinBox(
+              min: 0,
+              max: 500_000,
+              value: haftLevelSpinboxValue,
+              onChanged: (value) => setState(() {
+                haftLevelSpinboxValue = value;
+              }),
+            ),
+
+            // 2h haft spinbox
+            const Text('2-Handed Haft Level:'),
+            SpinBox(
+              min: 0,
+              max: 500_000,
+              value: h2_haftLevelSpinboxValue,
+              onChanged: (value) => setState(() {
+                h2_haftLevelSpinboxValue = value;
+              }),
+            ),
+
+            // polearm spinbox
+            const Text('Polearm Level:'),
+            SpinBox(
+              min: 0,
+              max: 500_000,
+              value: polearmLevelSpinboxValue,
+              onChanged: (value) => setState(() {
+                polearmLevelSpinboxValue = value;
+              }),
+            ),
+
+            // sythe spinbox
+            Text('Sythe Level:$playerExp xp/ ${0.5*pow(sytheLevelSpinboxValue+1,3)} xp required'),
+            SpinBox(
+              min: 0,
+              max: 500_000,
+              value: sytheLevelSpinboxValue,
+              onChanged: (value) => setState(() {
+                sytheLevelSpinboxValue = value;
+                playerExp-=0.5*pow(value+1,3);
+              },
+              ),
+                enabled: playerExp>0.5*pow(sytheLevelSpinboxValue,3)
+
+            ),
           ],
         ),
       ),
@@ -173,3 +305,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+// Also the Formulae for the XP is 0.5*(X^3). X is the level you are trying to reach and all values are rounded
