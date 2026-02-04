@@ -31,9 +31,11 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        colorScheme: .fromSeed(seedColor: Colors.pink),
+    ),
+      darkTheme: ThemeData.dark(),
+
+    home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -124,6 +126,142 @@ class _MyHomePageState extends State<MyHomePage> {
     return dropdown;
   }
 
+  List<Widget> getWaponXPSpinboxes() {
+    List<Widget> ret = [
+      // unarmed spinbox
+      Text(
+        'Unarmed Level:  ${pow(2 * unarmedXPSpinboxValue, (1 / 3)).floor()}',
+      ),
+      SpinBox(
+        min: 0,
+        max: 500_000,
+        value: unarmedXPSpinboxValue,
+        onChanged: (value) =>
+            setState(() {
+              unarmedXPSpinboxValue = value;
+            }),
+      ),
+
+      // dagger spinbox
+      Text('Dagger Level:  ${pow(2 * daggerXPSpinboxValue, (1 / 3)).round()}'),
+      SpinBox(
+        min: 0,
+        max: 500_000,
+        value: daggerXPSpinboxValue,
+        onChanged: (value) =>
+            setState(() {
+              daggerXPSpinboxValue = value;
+            }),
+      ),
+
+      // shield spinbox
+      Text('Shield Level:  ${pow(2 * shieldXPSpinboxValue, (1 / 3)).round()}'),
+      SpinBox(
+        min: 0,
+        max: 500_000,
+        value: shieldXPSpinboxValue,
+        onChanged: (value) =>
+            setState(() {
+              shieldXPSpinboxValue = value;
+            }),
+      ),
+
+      // staff spinbox
+      Text('Staff Level:  ${pow(2 * staffXPSpinboxValue, (1 / 3)).floor()}'),
+      SpinBox(
+        min: 0,
+        max: 500_000,
+        value: staffXPSpinboxValue,
+        onChanged: (value) =>
+            setState(() {
+              staffXPSpinboxValue = value;
+            }),
+      ),
+
+      // sword spinbox
+      Text('Sword Level:  ${pow(2 * swordXPSpinboxValue, (1 / 3)).floor()}'),
+      SpinBox(
+        min: 0,
+        max: 500_000,
+        value: swordXPSpinboxValue,
+        onChanged: (value) =>
+            setState(() {
+              swordXPSpinboxValue = value;
+            }),
+      ),
+
+      // 2h sword spinbox
+      Text(
+        '2-Handed Sword Level:  ${pow(2 * h2_swordXPSpinboxValue, (1 / 3))
+            .floor()}',
+      ),
+      SpinBox(
+        min: 0,
+        max: 500_000,
+        value: h2_swordXPSpinboxValue,
+        onChanged: (value) =>
+            setState(() {
+              h2_swordXPSpinboxValue = value;
+            }),
+      ),
+
+      // haft spinbox
+      Text('Haft Level: ${pow(2 * haftXPSpinboxValue, (1 / 3)).floor()}'),
+      SpinBox(
+        min: 0,
+        max: 500_000,
+        value: haftXPSpinboxValue,
+        onChanged: (value) =>
+            setState(() {
+              haftXPSpinboxValue = value;
+            }),
+      ),
+
+      // 2h haft spinbox
+      Text(
+        '2-Handed Haft Level: ${pow(2 * h2_haftXPSpinboxValue, (1 / 3))
+            .floor()}',
+      ),
+      SpinBox(
+        min: 0,
+        max: 500_000,
+        value: h2_haftXPSpinboxValue,
+        onChanged: (value) =>
+            setState(() {
+              h2_haftXPSpinboxValue = value;
+            }),
+      ),
+
+      // polearm spinbox
+      Text('Polearm Level: ${pow(2 * polearmXPSpinboxValue, (1 / 3)).floor()}'),
+      SpinBox(
+        min: 0,
+        max: 500_000,
+        value: polearmXPSpinboxValue,
+        onChanged: (value) =>
+            setState(() {
+              polearmXPSpinboxValue = value;
+            }),
+      ),
+
+      // sythe spinbox
+      Text('Sythe Level: ${pow(2 * sytheXPSpinboxValue, 1 / 3).floor()}'),
+      SpinBox(
+        min: 0,
+        max: 500_000,
+        value: sytheXPSpinboxValue,
+        onChanged: (value) =>
+            setState(() {
+              sytheXPSpinboxValue = value;
+              // playerExp-=0.5*pow(value+1,3);
+            }),
+
+        // enabled: playerExp>0.5*pow(sytheXPSpinboxValue,3)/
+      ),
+    ];
+    return ret;
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -137,7 +275,10 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme
+            .of(context)
+            .colorScheme
+            .inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
@@ -180,122 +321,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //     print(checkboxValue);
           //   }))
           // ],
-          children: [
-            // unarmed spinbox
-            Text('Unarmed Level:  ${pow(2 * unarmedXPSpinboxValue, (1 / 3)).floor()}'),
-            SpinBox(
-              min: 0,
-              max: 500_000,
-              value: unarmedXPSpinboxValue,
-              onChanged: (value) => setState(() {
-                unarmedXPSpinboxValue = value;
-              }),
-            ),
-
-            // dagger spinbox
-            Text('Dagger Level:  ${pow(2 * daggerXPSpinboxValue, (1 / 3)).round()}'),
-            SpinBox(
-              min: 0,
-              max: 500_000,
-              value: daggerXPSpinboxValue,
-              onChanged: (value) => setState(() {
-                daggerXPSpinboxValue = value;
-              }),
-            ),
-
-            // shield spinbox
-            Text('Shield Level:  ${pow(2 * shieldXPSpinboxValue, (1 / 3)).round()}'),
-            SpinBox(
-              min: 0,
-              max: 500_000,
-              value: shieldXPSpinboxValue,
-              onChanged: (value) => setState(() {
-                shieldXPSpinboxValue = value;
-              }),
-            ),
-
-            // staff spinbox
-            Text('Staff Level:  ${pow(2 * staffXPSpinboxValue, (1 / 3)).floor()}'),
-            SpinBox(
-              min: 0,
-              max: 500_000,
-              value: staffXPSpinboxValue,
-              onChanged: (value) => setState(() {
-                staffXPSpinboxValue = value;
-              }),
-            ),
-
-            // sword spinbox
-            Text('Sword Level:  ${pow(2 * swordXPSpinboxValue, (1 / 3)).floor()}'),
-            SpinBox(
-              min: 0,
-              max: 500_000,
-              value: swordXPSpinboxValue,
-              onChanged: (value) => setState(() {
-                swordXPSpinboxValue = value;
-              }),
-            ),
-
-            // 2h sword spinbox
-            Text('2-Handed Sword Level:  ${pow(2 * h2_swordXPSpinboxValue, (1 / 3)).floor()}'),
-            SpinBox(
-              min: 0,
-              max: 500_000,
-              value: h2_swordXPSpinboxValue,
-              onChanged: (value) => setState(() {
-                h2_swordXPSpinboxValue = value;
-              }),
-            ),
-
-            // haft spinbox
-            Text('Haft Level: ${pow(2 * haftXPSpinboxValue, (1 / 3)).floor()}'),
-            SpinBox(
-              min: 0,
-              max: 500_000,
-              value: haftXPSpinboxValue,
-              onChanged: (value) => setState(() {
-                haftXPSpinboxValue = value;
-              }),
-            ),
-
-            // 2h haft spinbox
-            Text(
-              '2-Handed Haft Level: ${pow(2 * h2_haftXPSpinboxValue, (1 / 3)).floor()}',
-            ),
-            SpinBox(
-              min: 0,
-              max: 500_000,
-              value: h2_haftXPSpinboxValue,
-              onChanged: (value) => setState(() {
-                h2_haftXPSpinboxValue = value;
-              }),
-            ),
-
-            // polearm spinbox
-            Text('Polearm Level: ${pow(2 * polearmXPSpinboxValue, (1 / 3)).floor()}'),
-            SpinBox(
-              min: 0,
-              max: 500_000,
-              value: polearmXPSpinboxValue,
-              onChanged: (value) => setState(() {
-                polearmXPSpinboxValue = value;
-              }),
-            ),
-
-            // sythe spinbox
-            Text('Sythe Level: ${pow(2 * sytheXPSpinboxValue, 1 / 3).floor()}'),
-            SpinBox(
-              min: 0,
-              max: 500_000,
-              value: sytheXPSpinboxValue,
-              onChanged: (value) => setState(() {
-                sytheXPSpinboxValue = value;
-                // playerExp-=0.5*pow(value+1,3);
-              }),
-
-              // enabled: playerExp>0.5*pow(sytheXPSpinboxValue,3)/
-            ),
-          ],
+          children: getWaponXPSpinboxes(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -307,4 +333,3 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-// Also the Formulae for the XP is 0.5*(X^3). X is the level you are trying to reach and all values are rounded
