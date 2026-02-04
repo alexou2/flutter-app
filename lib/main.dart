@@ -274,24 +274,22 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> makeXPSpinboxes<T>(List<(String, Wrapper<double>)> contents) {
     List<Widget> spinboxList = [];
     for ((String title, Wrapper<double> variable) ee in contents) {
-      var spin = LayoutGrid(
-        areas: '''
-          image  title
-          image  spinbox
-        ''',
-        columnSizes: [auto, auto],
-        rowSizes: [30.px, 30.px],
-        // autoPlacement:AutoPlacement.columnSparse,
+      var spin = Row(
+        mainAxisAlignment: .center,
         children: [
-          Image.asset("assets/transhaj.png"),
-          Text('${ee.$1} Level: ${pow(2 * ee.$2.value!, (1 / 3)).floor()}'),
-          SpinBox(
-            min: 0,
-            max: 500_000,
-            value: ee.$2.value!,
-            onChanged: (value) => setState(() {
-              ee.$2.value = value;
-            }),
+          Column(children: [Image.asset("assets/transhaj.png")]),
+          Column(
+            children: [
+              Text('${ee.$1} Level: ${pow(2 * ee.$2.value!, (1 / 3)).floor()}'),
+              SpinBox(
+                min: 0,
+                max: 500_000,
+                value: ee.$2.value!,
+                onChanged: (value) => setState(() {
+                  ee.$2.value = value;
+                }),
+              ),
+            ],
           ),
         ],
       );
