@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,10 +33,10 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.pink),
-    ),
+      ),
       darkTheme: ThemeData.dark(),
 
-    home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'TTRPG app'),
     );
   }
 }
@@ -62,12 +63,15 @@ class Wrapper<T> {
   T? value;
 
   Wrapper(T this.value);
+
+  @override
+  String toString() {
+    return this.value.toString();
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
-  double playerExp = 1_000;
 
   // used for the dropdown menu
   // the list of the elements in the dropdown menu
@@ -83,16 +87,18 @@ class _MyHomePageState extends State<MyHomePage> {
   bool? checkboxValue = false;
 
   // equipement levels
-  double unarmedXPSpinboxValue = 0;
-  double daggerXPSpinboxValue = 0;
-  double shieldXPSpinboxValue = 0;
-  double staffXPSpinboxValue = 0;
-  double swordXPSpinboxValue = 0;
-  double haftXPSpinboxValue = 0;
-  double h2_swordXPSpinboxValue = 0;
-  double h2_haftXPSpinboxValue = 0;
-  double polearmXPSpinboxValue = 0;
-  double sytheXPSpinboxValue = 0;
+  Wrapper<double> unarmedXPSpinboxValue = new Wrapper(0);
+  Wrapper<double> daggerXPSpinboxValue = new Wrapper(0);
+  Wrapper<double> shieldXPSpinboxValue = new Wrapper(0);
+  Wrapper<double> staffXPSpinboxValue = new Wrapper(0);
+  Wrapper<double> swordXPSpinboxValue = new Wrapper(0);
+  Wrapper<double> haftXPSpinboxValue = new Wrapper(0);
+  Wrapper<double> h2_swordXPSpinboxValue = new Wrapper(0);
+  Wrapper<double> h2_haftXPSpinboxValue = new Wrapper(0);
+  Wrapper<double> polearmXPSpinboxValue = new Wrapper(0);
+  Wrapper<double> sytheXPSpinboxValue = new Wrapper(0);
+
+  //
 
   void dropdown_clicked() {}
 
@@ -126,140 +132,172 @@ class _MyHomePageState extends State<MyHomePage> {
     return dropdown;
   }
 
+  //returns the list of spinboxes for weapon leveling
   List<Widget> getWaponXPSpinboxes() {
     List<Widget> ret = [
       // unarmed spinbox
       Text(
-        'Unarmed Level:  ${pow(2 * unarmedXPSpinboxValue, (1 / 3)).floor()}',
+        'Unarmed Level:  ${pow(2 * unarmedXPSpinboxValue.value!, (1 / 3)).floor()}',
       ),
       SpinBox(
         min: 0,
         max: 500_000,
-        value: unarmedXPSpinboxValue,
-        onChanged: (value) =>
-            setState(() {
-              unarmedXPSpinboxValue = value;
-            }),
+        value: unarmedXPSpinboxValue.value!,
+        onChanged: (value) => setState(() {
+          unarmedXPSpinboxValue.value = value;
+        }),
       ),
 
       // dagger spinbox
-      Text('Dagger Level:  ${pow(2 * daggerXPSpinboxValue, (1 / 3)).round()}'),
+      Text(
+        'Dagger Level:  ${pow(2 * daggerXPSpinboxValue.value!, (1 / 3)).round()}',
+      ),
       SpinBox(
         min: 0,
         max: 500_000,
-        value: daggerXPSpinboxValue,
-        onChanged: (value) =>
-            setState(() {
-              daggerXPSpinboxValue = value;
-            }),
+        value: daggerXPSpinboxValue.value!,
+        onChanged: (value) => setState(() {
+          daggerXPSpinboxValue.value = value;
+        }),
       ),
 
       // shield spinbox
-      Text('Shield Level:  ${pow(2 * shieldXPSpinboxValue, (1 / 3)).round()}'),
+      Text(
+        'Shield Level:  ${pow(2 * shieldXPSpinboxValue.value!, (1 / 3)).round()}',
+      ),
       SpinBox(
         min: 0,
         max: 500_000,
-        value: shieldXPSpinboxValue,
-        onChanged: (value) =>
-            setState(() {
-              shieldXPSpinboxValue = value;
-            }),
+        value: shieldXPSpinboxValue.value!,
+        onChanged: (value) => setState(() {
+          shieldXPSpinboxValue.value = value;
+        }),
       ),
 
       // staff spinbox
-      Text('Staff Level:  ${pow(2 * staffXPSpinboxValue, (1 / 3)).floor()}'),
+      Text(
+        'Staff Level:  ${pow(2 * staffXPSpinboxValue.value!, (1 / 3)).floor()}',
+      ),
       SpinBox(
         min: 0,
         max: 500_000,
-        value: staffXPSpinboxValue,
-        onChanged: (value) =>
-            setState(() {
-              staffXPSpinboxValue = value;
-            }),
+        value: staffXPSpinboxValue.value!,
+        onChanged: (value) => setState(() {
+          staffXPSpinboxValue.value = value;
+        }),
       ),
 
       // sword spinbox
-      Text('Sword Level:  ${pow(2 * swordXPSpinboxValue, (1 / 3)).floor()}'),
+      Text(
+        'Sword Level:  ${pow(2 * swordXPSpinboxValue.value!, (1 / 3)).floor()}',
+      ),
       SpinBox(
         min: 0,
         max: 500_000,
-        value: swordXPSpinboxValue,
-        onChanged: (value) =>
-            setState(() {
-              swordXPSpinboxValue = value;
-            }),
+        value: swordXPSpinboxValue.value!,
+        onChanged: (value) => setState(() {
+          swordXPSpinboxValue.value = value;
+        }),
       ),
 
       // 2h sword spinbox
       Text(
-        '2-Handed Sword Level:  ${pow(2 * h2_swordXPSpinboxValue, (1 / 3))
-            .floor()}',
+        '2-Handed Sword Level:  ${pow(2 * h2_swordXPSpinboxValue.value!, (1 / 3)).floor()}',
       ),
       SpinBox(
         min: 0,
         max: 500_000,
-        value: h2_swordXPSpinboxValue,
-        onChanged: (value) =>
-            setState(() {
-              h2_swordXPSpinboxValue = value;
-            }),
+        value: h2_swordXPSpinboxValue.value!,
+        onChanged: (value) => setState(() {
+          h2_swordXPSpinboxValue.value = value;
+        }),
       ),
 
       // haft spinbox
-      Text('Haft Level: ${pow(2 * haftXPSpinboxValue, (1 / 3)).floor()}'),
+      Text(
+        'Haft Level: ${pow(2 * haftXPSpinboxValue.value!, (1 / 3)).floor()}',
+      ),
       SpinBox(
         min: 0,
         max: 500_000,
-        value: haftXPSpinboxValue,
-        onChanged: (value) =>
-            setState(() {
-              haftXPSpinboxValue = value;
-            }),
+        value: haftXPSpinboxValue.value!,
+        onChanged: (value) => setState(() {
+          haftXPSpinboxValue.value = value;
+        }),
       ),
 
       // 2h haft spinbox
       Text(
-        '2-Handed Haft Level: ${pow(2 * h2_haftXPSpinboxValue, (1 / 3))
-            .floor()}',
+        '2-Handed Haft Level: ${pow(2 * h2_haftXPSpinboxValue.value!, (1 / 3)).floor()}',
       ),
       SpinBox(
         min: 0,
         max: 500_000,
-        value: h2_haftXPSpinboxValue,
-        onChanged: (value) =>
-            setState(() {
-              h2_haftXPSpinboxValue = value;
-            }),
+        value: h2_haftXPSpinboxValue.value!,
+        onChanged: (value) => setState(() {
+          h2_haftXPSpinboxValue.value = value;
+        }),
       ),
 
       // polearm spinbox
-      Text('Polearm Level: ${pow(2 * polearmXPSpinboxValue, (1 / 3)).floor()}'),
+      Text(
+        'Polearm Level: ${pow(2 * polearmXPSpinboxValue.value!, (1 / 3)).floor()}',
+      ),
       SpinBox(
         min: 0,
         max: 500_000,
-        value: polearmXPSpinboxValue,
-        onChanged: (value) =>
-            setState(() {
-              polearmXPSpinboxValue = value;
-            }),
+        value: polearmXPSpinboxValue.value!,
+        onChanged: (value) => setState(() {
+          polearmXPSpinboxValue.value = value;
+        }),
       ),
 
       // sythe spinbox
-      Text('Sythe Level: ${pow(2 * sytheXPSpinboxValue, 1 / 3).floor()}'),
+      Text(
+        'Sythe Level: ${pow(2 * sytheXPSpinboxValue.value!, 1 / 3).floor()}',
+      ),
       SpinBox(
         min: 0,
         max: 500_000,
-        value: sytheXPSpinboxValue,
-        onChanged: (value) =>
-            setState(() {
-              sytheXPSpinboxValue = value;
-              // playerExp-=0.5*pow(value+1,3);
-            }),
+        value: sytheXPSpinboxValue.value!,
+        onChanged: (value) => setState(() {
+          sytheXPSpinboxValue.value = value;
+          // playerExp-=0.5*pow(value+1,3);
+        }),
 
         // enabled: playerExp>0.5*pow(sytheXPSpinboxValue,3)/
       ),
     ];
     return ret;
+  }
+
+  List<Widget> makeXPSpinboxes<T>(List<(String, Wrapper<double>)> contents) {
+    List<Widget> spinboxList = [];
+    for ((String title, Wrapper<double> variable) ee in contents) {
+      var spin = LayoutGrid(
+        areas: '''
+          image  title
+          image  spinbox
+        ''',
+        columnSizes: [auto, auto],
+        rowSizes: [30.px, 30.px],
+        // autoPlacement:AutoPlacement.columnSparse,
+        children: [
+          Image.asset("assets/transhaj.png"),
+          Text('${ee.$1} Level: ${pow(2 * ee.$2.value!, (1 / 3)).floor()}'),
+          SpinBox(
+            min: 0,
+            max: 500_000,
+            value: ee.$2.value!,
+            onChanged: (value) => setState(() {
+              ee.$2.value = value;
+            }),
+          ),
+        ],
+      );
+      spinboxList.add(spin);
+    }
+    return spinboxList;
   }
 
   @override
@@ -275,10 +313,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
@@ -286,7 +321,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
+        child: LayoutGrid(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -300,28 +335,28 @@ class _MyHomePageState extends State<MyHomePage> {
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
-          mainAxisAlignment: .center,
-          // children: [
-          //   createDropdownMenu(this.input, _numbers_list),
-          //   SpinBox(
-          //     min: 1,
-          //     max: 100,
-          //     value: spinboxValue,
-          //     onChanged: (value) => setState(() {spinboxValue = value;},
-          //     ), enabled: checkboxValue,),
-          //   const Text('You have pushed the button this many times:'),
-          //   Text(
-          //     '$_counter',
-          //     style: Theme.of(context).textTheme.headlineMedium,
-          //   ),
-          //   Text("dropdown: "+input.value!),
-          //   Text("spinbox: "+spinboxValue.toString()),
-          //   Checkbox(value: checkboxValue,tristate: true, onChanged: (bool? newValue)=> setState(() {
-          //     checkboxValue = newValue;
-          //     print(checkboxValue);
-          //   }))
-          // ],
-          children: getWaponXPSpinboxes(),
+          // mainAxisAlignment: .center,
+          areas: '''
+          header header  header
+          magic  vision  element
+          .      .       weapons
+          .      .       .
+        ''',
+          columnSizes: [auto, auto, auto],
+          rowSizes: [auto, auto, auto, auto],
+
+          children: [
+            NamedAreaGridPlacement(
+              areaName: 'weapons',
+
+              // child: Container(color: Colors.red),
+              child: Column(
+                // children: getWaponXPSpinboxes(),
+                children: makeXPSpinboxes([("uwu", swordXPSpinboxValue)]),
+                mainAxisAlignment: .center,
+              ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -333,3 +368,23 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+// children: [
+//   createDropdownMenu(this.input, _numbers_list),
+//   SpinBox(
+//     min: 1,
+//     max: 100,
+//     value: spinboxValue,
+//     onChanged: (value) => setState(() {spinboxValue = value;},
+//     ), enabled: checkboxValue,),
+//   const Text('You have pushed the button this many times:'),
+//   Text(
+//     '$_counter',
+//     style: Theme.of(context).textTheme.headlineMedium,
+//   ),
+//   Text("dropdown: "+input.value!),
+//   Text("spinbox: "+spinboxValue.toString()),
+//   Checkbox(value: checkboxValue,tristate: true, onChanged: (bool? newValue)=> setState(() {
+//     checkboxValue = newValue;
+//     print(checkboxValue);
+//   }))
+// ],
