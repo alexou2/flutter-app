@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter_spinbox: ^0.13.1
   flutter_layout_grid: ^2.0.0
+#  flutter_popup: ^latest_version
+
   flutter:
     sdk: flutter
 

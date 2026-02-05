@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+// import 'package:flutter_popup/flutter_popup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -132,162 +133,35 @@ class _MyHomePageState extends State<MyHomePage> {
     return dropdown;
   }
 
-  //returns the list of spinboxes for weapon leveling
-  List<Widget> getWaponXPSpinboxes() {
-    List<Widget> ret = [
-      // unarmed spinbox
-      Text(
-        'Unarmed Level:  ${pow(2 * unarmedXPSpinboxValue.value!, (1 / 3)).floor()}',
-      ),
-      SpinBox(
-        min: 0,
-        max: 500_000,
-        value: unarmedXPSpinboxValue.value!,
-        onChanged: (value) => setState(() {
-          unarmedXPSpinboxValue.value = value;
-        }),
-      ),
+  // creates a prompt asking for ammount of xp gained
+  double promptForXPGained() {
+    print("added 10 xp");
 
-      // dagger spinbox
-      Text(
-        'Dagger Level:  ${pow(2 * daggerXPSpinboxValue.value!, (1 / 3)).round()}',
-      ),
-      SpinBox(
-        min: 0,
-        max: 500_000,
-        value: daggerXPSpinboxValue.value!,
-        onChanged: (value) => setState(() {
-          daggerXPSpinboxValue.value = value;
-        }),
-      ),
-
-      // shield spinbox
-      Text(
-        'Shield Level:  ${pow(2 * shieldXPSpinboxValue.value!, (1 / 3)).round()}',
-      ),
-      SpinBox(
-        min: 0,
-        max: 500_000,
-        value: shieldXPSpinboxValue.value!,
-        onChanged: (value) => setState(() {
-          shieldXPSpinboxValue.value = value;
-        }),
-      ),
-
-      // staff spinbox
-      Text(
-        'Staff Level:  ${pow(2 * staffXPSpinboxValue.value!, (1 / 3)).floor()}',
-      ),
-      SpinBox(
-        min: 0,
-        max: 500_000,
-        value: staffXPSpinboxValue.value!,
-        onChanged: (value) => setState(() {
-          staffXPSpinboxValue.value = value;
-        }),
-      ),
-
-      // sword spinbox
-      Text(
-        'Sword Level:  ${pow(2 * swordXPSpinboxValue.value!, (1 / 3)).floor()}',
-      ),
-      SpinBox(
-        min: 0,
-        max: 500_000,
-        value: swordXPSpinboxValue.value!,
-        onChanged: (value) => setState(() {
-          swordXPSpinboxValue.value = value;
-        }),
-      ),
-
-      // 2h sword spinbox
-      Text(
-        '2-Handed Sword Level:  ${pow(2 * h2_swordXPSpinboxValue.value!, (1 / 3)).floor()}',
-      ),
-      SpinBox(
-        min: 0,
-        max: 500_000,
-        value: h2_swordXPSpinboxValue.value!,
-        onChanged: (value) => setState(() {
-          h2_swordXPSpinboxValue.value = value;
-        }),
-      ),
-
-      // haft spinbox
-      Text(
-        'Haft Level: ${pow(2 * haftXPSpinboxValue.value!, (1 / 3)).floor()}',
-      ),
-      SpinBox(
-        min: 0,
-        max: 500_000,
-        value: haftXPSpinboxValue.value!,
-        onChanged: (value) => setState(() {
-          haftXPSpinboxValue.value = value;
-        }),
-      ),
-
-      // 2h haft spinbox
-      Text(
-        '2-Handed Haft Level: ${pow(2 * h2_haftXPSpinboxValue.value!, (1 / 3)).floor()}',
-      ),
-      SpinBox(
-        min: 0,
-        max: 500_000,
-        value: h2_haftXPSpinboxValue.value!,
-        onChanged: (value) => setState(() {
-          h2_haftXPSpinboxValue.value = value;
-        }),
-      ),
-
-      // polearm spinbox
-      Text(
-        'Polearm Level: ${pow(2 * polearmXPSpinboxValue.value!, (1 / 3)).floor()}',
-      ),
-      SpinBox(
-        min: 0,
-        max: 500_000,
-        value: polearmXPSpinboxValue.value!,
-        onChanged: (value) => setState(() {
-          polearmXPSpinboxValue.value = value;
-        }),
-      ),
-
-      // sythe spinbox
-      Text(
-        'Sythe Level: ${pow(2 * sytheXPSpinboxValue.value!, 1 / 3).floor()}',
-      ),
-      SpinBox(
-        min: 0,
-        max: 500_000,
-        value: sytheXPSpinboxValue.value!,
-        onChanged: (value) => setState(() {
-          sytheXPSpinboxValue.value = value;
-          // playerExp-=0.5*pow(value+1,3);
-        }),
-
-        // enabled: playerExp>0.5*pow(sytheXPSpinboxValue,3)/
-      ),
-    ];
-    return ret;
+    return 10;
   }
 
   List<Widget> makeXPSpinboxes<T>(List<(String, Wrapper<double>)> contents) {
     List<Widget> spinboxList = [];
     for ((String title, Wrapper<double> variable) ee in contents) {
       var spin = Row(
-        mainAxisAlignment: .center,
         children: [
-          Column(children: [Image.asset("assets/transhaj.png")]),
           Column(
             children: [
-              Text('${ee.$1} Level: ${pow(2 * ee.$2.value!, (1 / 3)).floor()}'),
-              SpinBox(
-                min: 0,
-                max: 500_000,
-                value: ee.$2.value!,
-                onChanged: (value) => setState(() {
-                  ee.$2.value = value;
+              Image.asset("assets/transhaj.png", width: 50, height: 50),
+            ],
+          ),
+          Column(
+            children: [
+              Text(
+                ' ${ee.$2.value!} ${ee.$1} XP (lvl ${pow(2 * ee.$2.value!, (1 / 3)).floor()})',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              TextButton(
+                onPressed: () => setState(() {
+                  var xpGained = promptForXPGained();
+                  ee.$2.value = ee.$2.value! + xpGained;
                 }),
+                child: Text("add XP"),
               ),
             ],
           ),
@@ -336,8 +210,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: .center,
           areas: '''
           header header  header
-          magic  vision  element
-          .      .       weapons
+          weapons vision element
+          .      .       magic
           .      .       .
         ''',
           columnSizes: [auto, auto, auto],
@@ -350,7 +224,18 @@ class _MyHomePageState extends State<MyHomePage> {
               // child: Container(color: Colors.red),
               child: Column(
                 // children: getWaponXPSpinboxes(),
-                children: makeXPSpinboxes([("uwu", swordXPSpinboxValue)]),
+                children: makeXPSpinboxes([
+                  ("unarmed", unarmedXPSpinboxValue),
+                  ("dagger", daggerXPSpinboxValue),
+                  ("shield", shieldXPSpinboxValue),
+                  ("staff", staffXPSpinboxValue),
+                  ("sword", swordXPSpinboxValue),
+                  ("haft", haftXPSpinboxValue),
+                  ("2-handed sword", h2_swordXPSpinboxValue),
+                  ("2-handed haft", h2_haftXPSpinboxValue),
+                  ("polearm", polearmXPSpinboxValue),
+                  ("sythe", sytheXPSpinboxValue),
+                ]),
                 mainAxisAlignment: .center,
               ),
             ),
@@ -386,3 +271,142 @@ class _MyHomePageState extends State<MyHomePage> {
 //     print(checkboxValue);
 //   }))
 // ],
+
+//returns the list of spinboxes for weapon leveling
+// List<Widget> getWaponXPSpinboxes() {
+//   List<Widget> ret = [
+//     // unarmed spinbox
+//     Text(
+//       'Unarmed Level:  ${pow(2 * unarmedXPSpinboxValue.value!, (1 / 3)).floor()}',
+//     ),
+//     SpinBox(
+//       min: 0,
+//       max: 500_000,
+//       value: unarmedXPSpinboxValue.value!,
+//       onChanged: (value) => setState(() {
+//         unarmedXPSpinboxValue.value = value;
+//       }),
+//     ),
+//
+//     // dagger spinbox
+//     Text(
+//       'Dagger Level:  ${pow(2 * daggerXPSpinboxValue.value!, (1 / 3)).round()}',
+//     ),
+//     SpinBox(
+//       min: 0,
+//       max: 500_000,
+//       value: daggerXPSpinboxValue.value!,
+//       onChanged: (value) => setState(() {
+//         daggerXPSpinboxValue.value = value;
+//       }),
+//     ),
+//
+//     // shield spinbox
+//     Text(
+//       'Shield Level:  ${pow(2 * shieldXPSpinboxValue.value!, (1 / 3)).round()}',
+//     ),
+//     SpinBox(
+//       min: 0,
+//       max: 500_000,
+//       value: shieldXPSpinboxValue.value!,
+//       onChanged: (value) => setState(() {
+//         shieldXPSpinboxValue.value = value;
+//       }),
+//     ),
+//
+//     // staff spinbox
+//     Text(
+//       'Staff Level:  ${pow(2 * staffXPSpinboxValue.value!, (1 / 3)).floor()}',
+//     ),
+//     SpinBox(
+//       min: 0,
+//       max: 500_000,
+//       value: staffXPSpinboxValue.value!,
+//       onChanged: (value) => setState(() {
+//         staffXPSpinboxValue.value = value;
+//       }),
+//     ),
+//
+//     // sword spinbox
+//     Text(
+//       'Sword Level:  ${pow(2 * swordXPSpinboxValue.value!, (1 / 3)).floor()}',
+//     ),
+//     SpinBox(
+//       min: 0,
+//       max: 500_000,
+//       value: swordXPSpinboxValue.value!,
+//       onChanged: (value) => setState(() {
+//         swordXPSpinboxValue.value = value;
+//       }),
+//     ),
+//
+//     // 2h sword spinbox
+//     Text(
+//       '2-Handed Sword Level:  ${pow(2 * h2_swordXPSpinboxValue.value!, (1 / 3)).floor()}',
+//     ),
+//     SpinBox(
+//       min: 0,
+//       max: 500_000,
+//       value: h2_swordXPSpinboxValue.value!,
+//       onChanged: (value) => setState(() {
+//         h2_swordXPSpinboxValue.value = value;
+//       }),
+//     ),
+//
+//     // haft spinbox
+//     Text(
+//       'Haft Level: ${pow(2 * haftXPSpinboxValue.value!, (1 / 3)).floor()}',
+//     ),
+//     SpinBox(
+//       min: 0,
+//       max: 500_000,
+//       value: haftXPSpinboxValue.value!,
+//       onChanged: (value) => setState(() {
+//         haftXPSpinboxValue.value = value;
+//       }),
+//     ),
+//
+//     // 2h haft spinbox
+//     Text(
+//       '2-Handed Haft Level: ${pow(2 * h2_haftXPSpinboxValue.value!, (1 / 3)).floor()}',
+//     ),
+//     SpinBox(
+//       min: 0,
+//       max: 500_000,
+//       value: h2_haftXPSpinboxValue.value!,
+//       onChanged: (value) => setState(() {
+//         h2_haftXPSpinboxValue.value = value;
+//       }),
+//     ),
+//
+//     // polearm spinbox
+//     Text(
+//       'Polearm Level: ${pow(2 * polearmXPSpinboxValue.value!, (1 / 3)).floor()}',
+//     ),
+//     SpinBox(
+//       min: 0,
+//       max: 500_000,
+//       value: polearmXPSpinboxValue.value!,
+//       onChanged: (value) => setState(() {
+//         polearmXPSpinboxValue.value = value;
+//       }),
+//     ),
+//
+//     // sythe spinbox
+//     Text(
+//       'Sythe Level: ${pow(2 * sytheXPSpinboxValue.value!, 1 / 3).floor()}',
+//     ),
+//     SpinBox(
+//       min: 0,
+//       max: 500_000,
+//       value: sytheXPSpinboxValue.value!,
+//       onChanged: (value) => setState(() {
+//         sytheXPSpinboxValue.value = value;
+//         // playerExp-=0.5*pow(value+1,3);
+//       }),
+//
+//       // enabled: playerExp>0.5*pow(sytheXPSpinboxValue,3)/
+//     ),
+//   ];
+//   return ret;
+// }
