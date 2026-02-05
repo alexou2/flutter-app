@@ -158,7 +158,9 @@ _showOverlay(context);
                 // ' ${ee.$2.value!} ${ee.$1} XP (lvl ${pow(2 * ee.$2.value!, (1 / 3)).floor()})',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
+
               TextButton(
+                // style: ButtonStyle(overlayColor: WidgetStateProperty.fromMap(Colors.green)),
                 onPressed: () => setState(() {
                   var xpGained = promptForXPGained(context);
                   ee.$2.value = ee.$2.value! + xpGained;
