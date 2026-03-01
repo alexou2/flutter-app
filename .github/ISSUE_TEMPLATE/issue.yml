@@ -1,5 +1,5 @@
 name: 🐞 Bug report
-description: Report a bug in Kotatsu
+description: Report a bug in the game
 labels: [bug]
 body:
 
@@ -35,13 +35,13 @@ body:
       validations:
           required: true
 
-    - type: input
-      id: android-version
+   - type: input
+      id: platform
       attributes:
-          label: Android version
-          description: You can find this somewhere in your Android settings.
+          label: Platform
+          description: Are you using what operating system or browser are you using? with version
           placeholder: |
-              Example: "12.0"
+              Example: "Windows 11 26H1"
       validations:
           required: true
 
@@ -49,9 +49,9 @@ body:
       id: device
       attributes:
           label: Device
-          description: List your device and model.
+          description: List your device and model .
           placeholder: |
-              Example: "LG Nexus 5X"
+              Example: "Lenovo laptop runing"
       validations:
           required: false
 
@@ -60,7 +60,5 @@ body:
       attributes:
           label: Acknowledgements
           options:
-              - label: This is not a duplicate of an existing issue. Please look through the list of [open issues](https://github.com/KotatsuApp/Kotatsu/issues) before creating a new one.
-                required: true
-              - label: This is not an issue with a specific manga source. Otherwise, you have to open an issue in the [parsers repository](https://github.com/KotatsuApp/kotatsu-parsers/issues/new/choose).
+              - label: I pulled changes from the branch I'm working on
                 required: true

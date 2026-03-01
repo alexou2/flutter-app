@@ -1,0 +1,30 @@
+name: ⭐ Game feature
+description: Report a user experience quirk
+labels: [enhancement]
+body:
+
+    - type: textarea
+      id: summary
+      attributes:
+          label: Brief summary
+          description: Please describe, what went wrong. Indicate if it only happens in certain scenarios
+      validations:
+          required: true
+
+    - type: input
+      id: platform
+      attributes:
+          label: Platform
+          description: Are you using what operating system or browser are you using? with version
+          placeholder: |
+              Example: "Windows 11 26H1"
+      validations:
+          required: true
+
+ - type: checkboxes
+      id: acknowledgements
+      attributes:
+          label: Acknowledgements
+          options:
+              - label: I pulled changes from the branch I'm working on
+                required: true
