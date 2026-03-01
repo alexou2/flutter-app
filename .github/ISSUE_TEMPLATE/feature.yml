@@ -21,7 +21,7 @@ body:
       validations:
           required: true
 
- - type: checkboxes
+    - type: checkboxes
       id: acknowledgements
       attributes:
           label: Acknowledgements
