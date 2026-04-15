@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Titties RPG',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -134,13 +134,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // creates a prompt asking for ammount of xp gained
-  double promptForXPGained(BuildContext context) {
-    print("added 10 xp");
-_showOverlay(context);
-    return 10;
-  }
+  // double promptForXPGained(BuildContext context) {
+  //   print("added 10 xp");
+  //   _showOverlay(context);
+  //   return 10;
+  // }
 
-  List<Widget> makeXPSpinboxes(List<(String, Wrapper<double>)> contents, BuildContext context) {
+  List<Widget> makeXPSpinboxes(
+    List<(String, Wrapper<double>)> contents,
+    BuildContext context,
+  ) {
     List<Widget> spinboxList = [];
     for ((String title, Wrapper<double> variable) ee in contents) {
       var spin = Row(
@@ -162,8 +165,9 @@ _showOverlay(context);
               TextButton(
                 // style: ButtonStyle(overlayColor: WidgetStateProperty.fromMap(Colors.green)),
                 onPressed: () => setState(() {
-                  var xpGained = promptForXPGained(context);
-                  ee.$2.value = ee.$2.value! + xpGained;
+                  // var xpGained = promptForXPGained(context);
+                  var xpGained = _showOverlay(context, ee.$2, ee.$1);
+                  // ee.$2.value = ee.$2.value! + xpGained;
                 }),
                 child: Text("Add XP"),
               ),
@@ -176,60 +180,148 @@ _showOverlay(context);
     return spinboxList;
   }
 
-  void _showOverlay(BuildContext context) async {
+  void _showOverlay(
+    BuildContext context,
+    Wrapper<double> xp,
+    String title,
+  ) async {
     // Declaring and Initializing OverlayState
     // and OverlayEntry objects
     OverlayState overlayState = Overlay.of(context);
     late OverlayEntry overlayEntry;
 
+    final controller = TextEditingController();
+    double xpToAdd = 0;
+
     overlayEntry = OverlayEntry(
+      maintainState: true,
       builder: (context) {
         // You can return any widget you like here
         // to be displayed on the Overlay
         return Positioned(
           left: MediaQuery.of(context).size.width * 0.2,
           top: MediaQuery.of(context).size.height * 0.3,
-          child: Container(
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: Stack(
-              children: [
-                Image.asset(
-                  'assets/transhaj.png',
-                  colorBlendMode: BlendMode.multiply,
-                ),
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.15,
-                  left: MediaQuery.of(context).size.width * 0.13,
-                  child: Row(
-                    children: [
-                      Material(
-                        color: Colors.transparent,
-                        child: Text(
-                          'Add XP!',
-                          style: TextStyle(
-                            fontSize:
-                            MediaQuery.of(context).size.height * 0.028,
-                            color: Colors.green,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                      GestureDetector(
-                        onTap: () {
-                          // When the icon is pressed the OverlayEntry
-                          // is removed from Overlay
-                          overlayEntry.remove();
-                        },
-                        child: Icon(
-                          Icons.close,
-                          color: Colors.green,
-                          size: MediaQuery.of(context).size.height * 0.025,
-                        ),
-                      ),
-                    ],
+          width: MediaQuery.of(context).size.width * 0.5,
+
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Container(
+              color: Theme.of(context).colorScheme.inversePrimary,
+
+              child: LayoutGrid(
+                areas: '''
+          .      title  exit
+          icon   xpNum apply
+        ''',
+                columnSizes: [auto, auto, auto],
+                rowSizes: [auto, auto],
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  NamedAreaGridPlacement(
+                    areaName: 'icon',
+                    child: Image.asset(
+                      'assets/transhaj.png',
+                      colorBlendMode: BlendMode.multiply,
+                    ),
                   ),
-                ),
-              ],
+                  // add xp text
+                  NamedAreaGridPlacement(
+                    areaName: 'title',
+                    child: Material(
+                      color: Colors.transparent,
+
+                      child: Text(
+                        'Add $title XP!',
+
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height * 0.028,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // SizedBox(width: MediaQuery.of(context).size.width * 0.2),
+
+                  // exit button
+                  NamedAreaGridPlacement(
+                    areaName: 'exit',
+                    child: GestureDetector(
+                      onTap: () {
+                        // When the icon is pressed the OverlayEntry
+                        // is removed from Overlay
+                        overlayEntry.remove();
+                        controller.dispose();
+                      },
+
+                      child: Icon(
+                        Icons.close,
+                        color: Colors.green,
+                        size: MediaQuery.of(context).size.height * 0.025,
+                      ),
+                    ),
+                  ),
+                  NamedAreaGridPlacement(
+                    areaName: "xpNum",
+                    child: Material(
+                      color: Colors.transparent,
+
+                      child: TextField(
+                        controller: controller,
+                        decoration: InputDecoration(labelText: "Xp to add"),
+                        keyboardType: TextInputType.number,
+                        //todo add form verification for numbers
+                      ),
+                    ),
+                  ),
+                  NamedAreaGridPlacement(
+                    areaName: "apply",
+                    child: TextButton(
+                      // style: ButtonStyle(overlayColor: WidgetStateProperty.fromMap(Colors.green)),
+                      onPressed: () => setState(() {
+                        String xpStr = controller.text;
+                        xpToAdd = double.parse(xpStr);
+                        xp.value = xp.value! + xpToAdd;
+                        overlayEntry.remove();
+                        controller.dispose();
+                      }),
+                      child: Text("Add XP"),
+                    ),
+                  ),
+                  // Positioned(
+                  //   top: MediaQuery.of(context).size.height * 0.15,
+                  //   left: MediaQuery.of(context).size.width * 0.13,
+                  //   child: Row(
+                  //     children: [
+                  //       Material(
+                  //         color: Colors.transparent,
+                  //         child: Text(
+                  //           'Add XP!',
+                  //           style: TextStyle(
+                  //             fontSize:
+                  //             MediaQuery.of(context).size.height * 0.028,
+                  //             color: Colors.green,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                  //       GestureDetector(
+                  //         onTap: () {
+                  //           // When the icon is pressed the OverlayEntry
+                  //           // is removed from Overlay
+                  //           overlayEntry.remove();
+                  //         },
+                  //         child: Icon(
+                  //           Icons.close,
+                  //           color: Colors.green,
+                  //           size: MediaQuery.of(context).size.height * 0.025,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                ],
+              ),
             ),
           ),
         );
@@ -239,7 +331,6 @@ _showOverlay(context);
     // Inserting the OverlayEntry into the Overlay
     overlayState.insert(overlayEntry);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -328,7 +419,6 @@ _showOverlay(context);
 //     return MaterialApp(debugShowCheckedModeBanner: false, home: Example1());
 //   }
 // }
-
 
 // children: [
 //   createDropdownMenu(this.input, _numbers_list),
