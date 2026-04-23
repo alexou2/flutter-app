@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:Titties_RPG_App/SkillsWindow.dart';
 import 'package:Titties_RPG_App/inherited.dart';
 import 'package:Titties_RPG_App/spinboxWidget.dart';
 import 'package:Titties_RPG_App/utils.dart';
@@ -399,6 +400,11 @@ class _MyHomePageState extends State<MyHomePage> {
             NamedAreaGridPlacement(
               areaName: 'weapons',
               child: Weaponsxpwindow().build(context),
+              // child: ThemeProvider(themeMode: themeMode, toggleTheme: toggleTheme, child: child),
+            ),
+            NamedAreaGridPlacement(
+              areaName: 'vision',
+              child: Skillsxpwindow().build(context),
               // child: ThemeProvider(themeMode: themeMode, toggleTheme: toggleTheme, child: child),
             ),
           ],
