@@ -397,8 +397,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             NamedAreaGridPlacement(
               areaName: 'weapons',
-              // child: Weaponsxpwindow().build(context),
-             child: ThemeProvider(themeMode: themeMode, toggleTheme: toggleTheme, child: child),
+              child: Weaponsxpwindow().build(context),
+             // child: ThemeProvider(themeMode: themeMode, toggleTheme: toggleTheme, child: child),
             )
             ,
           ],

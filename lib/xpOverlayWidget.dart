@@ -162,7 +162,7 @@ class xpOverlay<T> extends State<WeaponsState> {
                         if (xpStr != "") {
                           xpToAdd = double.parse(xpStr);
                           xp.value = xp.value! + xpToAdd;
-                          print(xpToAdd);
+                          print("uwu");
                           instance.updateInfo();
                           overlayEntry.remove();
                           controller.dispose();
