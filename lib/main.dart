@@ -1,5 +1,8 @@
 import 'dart:math';
 
+import 'package:Titties_RPG_App/inherited.dart';
+import 'package:Titties_RPG_App/utils.dart';
+import 'package:Titties_RPG_App/weaponsXpWindow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
@@ -60,16 +63,16 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class Wrapper<T> {
-  T? value;
-
-  Wrapper(T this.value);
-
-  @override
-  String toString() {
-    return this.value.toString();
-  }
-}
+// class Wrapper<T> {
+//   T? value;
+//
+//   Wrapper(T this.value);
+//
+//   @override
+//   String toString() {
+//     return this.value.toString();
+//   }
+// }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
@@ -210,11 +213,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
               child: LayoutGrid(
                 areas: '''
-          .      title  exit
+          .      title .
           icon   xpNum apply
+          .      .     exit
         ''',
                 columnSizes: [auto, auto, auto],
-                rowSizes: [auto, auto],
+                rowSizes: [auto, auto, auto],
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   NamedAreaGridPlacement(
@@ -246,20 +250,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   // exit button
                   NamedAreaGridPlacement(
                     areaName: 'exit',
-                    child: GestureDetector(
-                      onTap: () {
-                        // When the icon is pressed the OverlayEntry
-                        // is removed from Overlay
-                        overlayEntry.remove();
-                        controller.dispose();
-                      },
-
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.green,
-                        size: MediaQuery.of(context).size.height * 0.025,
-                      ),
+                    child: TextButton(
+                      // style: ButtonStyle(overlayColor: WidgetStateProperty.fromMap(Colors.green)),
+                      onPressed: () => setState(() {
+                          overlayEntry.remove();
+                          controller.dispose();
+                      }),
+                      child: Text("Cancel"),
                     ),
+                    // child: GestureDetector(
+                    //
+                    //   onTap: () {
+                    //
+                    //     // When the icon is pressed the OverlayEntry
+                    //     // is removed from Overlay
+                    //     overlayEntry.remove();
+                    //     controller.dispose();
+                    //   },
+                    //
+                    //   child: Icon(
+                    //     Icons.close,
+                    //     color: Colors.green,
+                    //     size: MediaQuery.of(context).size.height * 0.025,
+                    //   ),
+                    // ),
                   ),
                   NamedAreaGridPlacement(
                     areaName: "xpNum",
@@ -280,10 +294,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       // style: ButtonStyle(overlayColor: WidgetStateProperty.fromMap(Colors.green)),
                       onPressed: () => setState(() {
                         String xpStr = controller.text;
-                        xpToAdd = double.parse(xpStr);
-                        xp.value = xp.value! + xpToAdd;
-                        overlayEntry.remove();
-                        controller.dispose();
+                        if( xpStr!="") {
+                          xpToAdd = double.parse(xpStr);
+                          xp.value = xp.value! + xpToAdd;
+
+                          overlayEntry.remove();
+                          controller.dispose();
+                        }
                       }),
                       child: Text("Add XP"),
                     ),
@@ -380,25 +397,10 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             NamedAreaGridPlacement(
               areaName: 'weapons',
-
-              // child: Container(color: Colors.red),
-              child: Column(
-                // children: getWaponXPSpinboxes(),
-                children: makeXPSpinboxes([
-                  ("unarmed", unarmedXPSpinboxValue),
-                  ("dagger", daggerXPSpinboxValue),
-                  ("shield", shieldXPSpinboxValue),
-                  ("staff", staffXPSpinboxValue),
-                  ("sword", swordXPSpinboxValue),
-                  ("haft", haftXPSpinboxValue),
-                  ("2-handed sword", h2_swordXPSpinboxValue),
-                  ("2-handed haft", h2_haftXPSpinboxValue),
-                  ("polearm", polearmXPSpinboxValue),
-                  ("sythe", sytheXPSpinboxValue),
-                ], context),
-                mainAxisAlignment: .center,
-              ),
-            ),
+              // child: Weaponsxpwindow().build(context),
+             child: ThemeProvider(themeMode: themeMode, toggleTheme: toggleTheme, child: child),
+            )
+            ,
           ],
         ),
       ),
