@@ -10,42 +10,49 @@ class WeaponsState extends StatefulWidget {
 }
 
 class Weaponsxpwindow extends State<WeaponsState> {
-  Wrapper<double> unarmedXPSpinboxValue = new Wrapper(0);
-  Wrapper<double> daggerXPSpinboxValue = new Wrapper(0);
-  Wrapper<double> shieldXPSpinboxValue = new Wrapper(0);
-  Wrapper<double> staffXPSpinboxValue = new Wrapper(0);
-  Wrapper<double> swordXPSpinboxValue = new Wrapper(0);
-  Wrapper<double> haftXPSpinboxValue = new Wrapper(0);
-  Wrapper<double> h2_swordXPSpinboxValue = new Wrapper(0);
-  Wrapper<double> h2_haftXPSpinboxValue = new Wrapper(0);
-  Wrapper<double> polearmXPSpinboxValue = new Wrapper(0);
-  Wrapper<double> sytheXPSpinboxValue = new Wrapper(0);
+  // Wrapper<double> unarmedXPSpinboxValue = new Wrapper(0);
+  // Wrapper<double> daggerXPSpinboxValue = new Wrapper(0);
+  // Wrapper<double> shieldXPSpinboxValue = new Wrapper(0);
+  // Wrapper<double> staffXPSpinboxValue = new Wrapper(0);
+  // Wrapper<double> swordXPSpinboxValue = new Wrapper(0);
+  // Wrapper<double> haftXPSpinboxValue = new Wrapper(0);
+  // Wrapper<double> h2_swordXPSpinboxValue = new Wrapper(0);
+  // Wrapper<double> h2_haftXPSpinboxValue = new Wrapper(0);
+  // Wrapper<double> polearmXPSpinboxValue = new Wrapper(0);
+  // Wrapper<double> sytheXPSpinboxValue = new Wrapper(0);
+  List<Weapons> weaponList = Weapons.ee();
 
   void updateInfo() {
     setState(() {
-      unarmedXPSpinboxValue.value = 10;
+      // unarmedXPSpinboxValue.value = 10;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    //   return spinboxWidget(
+    //         contents: [
+    //           ("unarmed", unarmedXPSpinboxValue),
+    //           ("dagger", daggerXPSpinboxValue),
+    //           ("shield", shieldXPSpinboxValue),
+    //           ("staff", staffXPSpinboxValue),
+    //           ("sword", swordXPSpinboxValue),
+    //           ("haft", haftXPSpinboxValue),
+    //           ("2-handed sword", h2_swordXPSpinboxValue),
+    //           ("2-handed haft", h2_haftXPSpinboxValue),
+    //           ("polearm", polearmXPSpinboxValue),
+    //           ("sythe", sytheXPSpinboxValue),
+    //         ],
+    //         context: context,
+    //         instance: this,
+    //       ).build(context)
+    //       as Widget;
+    // }
 
     return spinboxWidget(
-          contents: [
-            ("unarmed", unarmedXPSpinboxValue),
-            ("dagger", daggerXPSpinboxValue),
-            ("shield", shieldXPSpinboxValue),
-            ("staff", staffXPSpinboxValue),
-            ("sword", swordXPSpinboxValue),
-            ("haft", haftXPSpinboxValue),
-            ("2-handed sword", h2_swordXPSpinboxValue),
-            ("2-handed haft", h2_haftXPSpinboxValue),
-            ("polearm", polearmXPSpinboxValue),
-            ("sythe", sytheXPSpinboxValue),
-          ],
+          contents: weaponList,
           context: context,
           instance: this,
-        ).build(context)
-        as Widget;
+        ).build(context);
   }
 }

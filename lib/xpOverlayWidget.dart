@@ -19,17 +19,19 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 //   xpOverlay createState() => overlayState();
 // }
 
-class xpOverlay<T> extends State<WeaponsState> {
-  Wrapper<double> xp;
-  String title;
+class xpOverlay extends State<WeaponsState> {
+  // Wrapper xp;
+  // String title;
   BuildContext context;
+  Wrapper content;
   Weaponsxpwindow instance;
 
   // BuildContext context;
 
   xpOverlay({
-    required this.title,
-    required this.xp,
+    // required this.title,
+    // required this.xp,
+    required Wrapper this.content,
     required BuildContext this.context,
     required Weaponsxpwindow this.instance,
   });
@@ -100,7 +102,7 @@ class xpOverlay<T> extends State<WeaponsState> {
                       color: Colors.transparent,
 
                       child: Text(
-                        'Add $title XP!',
+                        'Add ${content.name} XP!',
 
                         style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height * 0.028,
@@ -161,7 +163,7 @@ class xpOverlay<T> extends State<WeaponsState> {
                         String xpStr = controller.text;
                         if (xpStr != "") {
                           xpToAdd = double.parse(xpStr);
-                          xp.value = xp.value! + xpToAdd;
+                          content.Xp = content.Xp! + xpToAdd;
                           print("uwu");
                           instance.updateInfo();
                           overlayEntry.remove();
