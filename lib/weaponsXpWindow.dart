@@ -1,15 +1,16 @@
 import 'package:Titties_RPG_App/spinboxWidget.dart';
 import 'package:Titties_RPG_App/utils.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
-class WeaponsState extends StatefulWidget {
-  const WeaponsState({Key? key}) : super(key: key);
+// class WeaponsState extends StatefulWidget {
+//   const WeaponsState({Key? key}) : super(key: key);
+//
+//   @override
+//   Weaponsxpwindow createState() => Weaponsxpwindow();
+// }
 
-  @override
-  Weaponsxpwindow createState() => Weaponsxpwindow();
-}
-
-class Weaponsxpwindow extends State<WeaponsState> {
+class Weaponsxpwindow extends StatelessWidget {
   // Wrapper<double> unarmedXPSpinboxValue = new Wrapper(0);
   // Wrapper<double> daggerXPSpinboxValue = new Wrapper(0);
   // Wrapper<double> shieldXPSpinboxValue = new Wrapper(0);
@@ -20,13 +21,13 @@ class Weaponsxpwindow extends State<WeaponsState> {
   // Wrapper<double> h2_haftXPSpinboxValue = new Wrapper(0);
   // Wrapper<double> polearmXPSpinboxValue = new Wrapper(0);
   // Wrapper<double> sytheXPSpinboxValue = new Wrapper(0);
-  List<Weapons> weaponList = Weapons.ee();
+  static List<Weapons> weaponList = Weapons.ee();
 
-  void updateInfo() {
-    setState(() {
-      // unarmedXPSpinboxValue.value = 10;
-    });
-  }
+  // void updateInfo() {
+  //   setState(() {
+  //     // unarmedXPSpinboxValue.value = 10;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +50,14 @@ class Weaponsxpwindow extends State<WeaponsState> {
     //       as Widget;
     // }
 
-    return spinboxWidget(
-          contents: weaponList,
-          context: context,
-          instance: this,
-        ).build(context);
+    return ChangeNotifierProvider(
+      create: (context) => WrapperModel(),
+      child: spinboxWidget(
+        contents: weaponList,
+        // context: context,
+        // instance: this,
+      ),
+    );
+    // return spinboxWidget(contents: weaponList).build(context);
   }
 }

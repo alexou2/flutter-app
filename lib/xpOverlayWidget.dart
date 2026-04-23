@@ -7,6 +7,7 @@ import 'package:Titties_RPG_App/weaponsXpWindow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:provider/provider.dart';
 // import 'package:flutter_popup/flutter_popup.dart';
 
 // class overlayState extends StatefulWidget {
@@ -19,21 +20,21 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 //   xpOverlay createState() => overlayState();
 // }
 
-class xpOverlay extends State<WeaponsState> {
+class xpOverlay extends StatelessWidget {
   // Wrapper xp;
   // String title;
-  BuildContext context;
-  Wrapper content;
-  Weaponsxpwindow instance;
-
   // BuildContext context;
+  Wrapper content;
+  // Weaponsxpwindow instance;
+
+  BuildContext ctx;
 
   xpOverlay({
     // required this.title,
     // required this.xp,
     required Wrapper this.content,
-    required BuildContext this.context,
-    required Weaponsxpwindow this.instance,
+    required BuildContext this.ctx,
+    // required Weaponsxpwindow this.instance,
   });
 
   // @override
@@ -163,9 +164,10 @@ class xpOverlay extends State<WeaponsState> {
                         String xpStr = controller.text;
                         if (xpStr != "") {
                           xpToAdd = double.parse(xpStr);
-                          content.Xp = content.Xp! + xpToAdd;
-                          print("uwu");
-                          instance.updateInfo();
+                          // content.Xp = content.Xp! + xpToAdd;
+                          print(xpToAdd);
+                          // instance.updateInfo();t v
+                          Provider.of<WrapperModel>(ctx, listen: false).addXp(content, xpToAdd);
                           overlayEntry.remove();
                           controller.dispose();
                         }

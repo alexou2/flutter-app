@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:Titties_RPG_App/inherited.dart';
+import 'package:Titties_RPG_App/spinboxWidget.dart';
 import 'package:Titties_RPG_App/utils.dart';
 import 'package:Titties_RPG_App/weaponsXpWindow.dart';
 import 'package:flutter/material.dart';
@@ -398,9 +399,8 @@ class _MyHomePageState extends State<MyHomePage> {
             NamedAreaGridPlacement(
               areaName: 'weapons',
               child: Weaponsxpwindow().build(context),
-             // child: ThemeProvider(themeMode: themeMode, toggleTheme: toggleTheme, child: child),
-            )
-            ,
+              // child: ThemeProvider(themeMode: themeMode, toggleTheme: toggleTheme, child: child),
+            ),
           ],
         ),
       ),
